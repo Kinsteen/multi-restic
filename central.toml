@@ -1,0 +1,59 @@
+# [agent.vaultwarden]
+# ip = "192.168.1.130"
+# ssh_port = "22"
+# ssh_user = "server"
+# backup_root = "/root/vaultwarden"
+# to_backup = [
+#     "vw-data/attachments",
+#     "vw-data/config.json",
+#     "vw-data/rsa*",
+#     "vaultwarden-database.sql",
+# ]
+# pre_command = [
+#     "docker compose exec postgresql pg_dumpall --clean --if-exists --username=vaultwarden > vaultwarden-database.sql",
+# ]
+# post_command = [
+#     "rm vaultwarden-database.sql",
+# ]
+
+# [agent.vaultwarden.repositories.backblaze]
+# endpoint = "s3:s3.us-east-1.amazonaws.com/bucket_name"
+# env_vars = [
+#     "env:B2_AWS_ACCESS_KEY_ID:AWS_ACCESS_KEY_ID",
+#     "env:B2_AWS_SECRET_ACCESS_KEY:AWS_SECRET_ACCESS_KEY",
+#     "env:VAULTWARDEN_RESTIC_PASSWORD:RESTIC_PASSWORD",
+# ]
+# [agent.vaultwarden.repositories.local]
+# endpoint = "/root/backup"
+# env_vars = [
+#     "env:VAULTWARDEN_RESTIC_PASSWORD:RESTIC_PASSWORD",
+# ]
+
+[agent.servarr]
+ip = "192.168.1.150"
+ssh_port = "22"
+ssh_user = "root"
+backup_root = "/root"
+scheduler = "systemd"
+to_backup = [
+    "prowlarr",
+]
+# pre_command = [
+#     "docker compose exec postgresql pg_dumpall --clean --if-exists --username=vaultwarden > vaultwarden-database.sql",
+# ]
+# post_command = [
+#     "rm vaultwarden-database.sql",
+# ]
+
+# [agent.servarr.repositories.backblaze]
+# endpoint = "s3:s3.us-east-1.amazonaws.com/bucket_name"
+# env_vars = [
+#     "env:B2_AWS_ACCESS_KEY_ID:AWS_ACCESS_KEY_ID",
+#     "env:B2_AWS_SECRET_ACCESS_KEY:AWS_SECRET_ACCESS_KEY",
+#     "env:VAULTWARDEN_RESTIC_PASSWORD:RESTIC_PASSWORD",
+# ]
+[agent.servarr.repositories.local]
+endpoint = "/root/backup"
+env_vars = [
+    "env:VAULTWARDEN_RESTIC_PASSWORD:RESTIC_PASSWORD",
+]
