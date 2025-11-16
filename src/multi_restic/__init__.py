@@ -119,8 +119,8 @@ def install(config: Config, agents: list[str], skip_test_backup: bool) -> None:
                 logger.error(stderr.read().decode())
                 break
 
-            restic_in_path = exec_cmd("restic version")
-            restic_in_multi_restic = exec_cmd(f"{install_location}/restic version")
+            restic_in_path = exec_cmd(client, "restic version")
+            restic_in_multi_restic = exec_cmd(client, f"{install_location}/restic version")
             download_restic = not restic_in_path and not restic_in_multi_restic
             if download_restic:
                 logger.warning(f"⚠️ Restic is not available on the agent. Downloading restic to {install_location}/restic.")

@@ -21,9 +21,9 @@ def generate_env_files(agent: AgentConfig) -> dict[str, str]:
                     env_files[repo_name] += f"export {value}\n"
                 case "env":
                     if len(rest) == 1:
-                        env_files[repo_name] += f"export {rest[0]}={env_values[rest[0]]}\n"
+                        env_files[repo_name] += f"export {rest[0]}='{env_values[rest[0]]}'\n"
                     elif len(rest) == 2:
-                        env_files[repo_name] += f"export {rest[1]}={env_values[rest[0]]}\n"
+                        env_files[repo_name] += f"export {rest[1]}='{env_values[rest[0]]}'\n"
     return env_files
 
 def generate_repository_script(agent: AgentConfig, repo_name: str, repo: RepositoryConfig) -> str:
